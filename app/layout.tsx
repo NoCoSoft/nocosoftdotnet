@@ -1,31 +1,25 @@
 import '@mantine/core/styles.css';
 
-import React from 'react';
-import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { theme } from '../theme';
+import { theme } from '@/theme';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'NoCoSoft | Web Development for Northern Colorado',
+  description: 'Professional web solutions for Northern Colorado businesses',
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" {...mantineHtmlProps}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
-        <link rel="shortcut icon" href="/favicon.svg" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <MantineProvider theme={theme}>
           <Header />
-          {children}
+          <main>{children}</main>
           <Footer />
         </MantineProvider>
       </body>
