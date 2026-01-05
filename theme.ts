@@ -1,5 +1,3 @@
-'use client';
-
 import { createTheme, MantineColorsTuple } from '@mantine/core';
 
 // Colorado-inspired deep blue (modern, slightly desaturated from flag blue)

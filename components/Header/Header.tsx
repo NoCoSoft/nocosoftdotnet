@@ -2,17 +2,32 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Box, Burger, Button, Container, Drawer, Group, Stack, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { IconMoon, IconSun } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  Box,
+  Burger,
+  Button,
+  Container,
+  Drawer,
+  Group,
+  Stack,
+  Text,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from '@mantine/core';
+import { useDisclosure, useMounted } from '@mantine/hooks';
 
 export default function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const pathname = usePathname();
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme('light');
 
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/services', label: 'Services' },
-    { href: '/work', label: 'Work' },
+    { href: '/portfolio', label: 'Portfolio' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -23,6 +38,9 @@ export default function Header() {
     }
     return pathname.startsWith(href);
   };
+
+  // Must use useMounted to avoid hydration issues for the color scheme toggle
+  const isMounted = useMounted();
 
   return (
     <Box component="header" style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}>
@@ -60,6 +78,19 @@ export default function Header() {
                 {link.label}
               </Button>
             ))}
+
+            {/* Dark mode toggle */}
+            {isMounted && (
+              <ActionIcon
+                onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
+                variant="subtle"
+                color="gray"
+                size="lg"
+                aria-label="Toggle color scheme"
+              >
+                {computedColorScheme === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />}
+              </ActionIcon>
+            )}
           </Group>
 
           {/* Mobile Menu Button */}
@@ -106,6 +137,22 @@ export default function Header() {
               {link.label}
             </Button>
           ))}
+
+          {/* Dark mode toggle for mobile */}
+          {isMounted && (
+            <Button
+              onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
+              variant="subtle"
+              color="gray"
+              fullWidth
+              size="lg"
+              leftSection={
+                computedColorScheme === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />
+              }
+            >
+              {computedColorScheme === 'light' ? 'Dark Mode' : 'Light Mode'}
+            </Button>
+          )}
         </Stack>
       </Drawer>
     </Box>
