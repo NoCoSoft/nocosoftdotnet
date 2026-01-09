@@ -14,7 +14,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Box component="footer" bg="gray.9" c="white">
+    <Box component="footer" bg="goldenYellow.9" c="white">
       <Container size="lg" py={60}>
         <Grid gutter="xl">
           {/* Company Info */}

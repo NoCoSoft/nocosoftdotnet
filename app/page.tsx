@@ -23,17 +23,60 @@ import {
   Title,
 } from '@mantine/core';
 
+const StepIcon = ({ number }: { number: number }) => (
+  <Box
+    style={{
+      width: 60,
+      height: 60,
+      borderRadius: '50%',
+      backgroundColor: 'var(--mantine-color-deepBlue-6)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'dark.0',
+      fontSize: 24,
+      fontWeight: 700,
+    }}
+  >
+    {number}
+  </Box>
+);
+
+const ValuePropositionCard = ({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) => (
+  <Grid.Col span={{ base: 12, md: 4 }}>
+    <Card shadow="sm" padding="lg" radius="md" h="100%">
+      <Stack gap="md" align="center" ta="center">
+        <ThemeIcon size={60} radius="md" variant="light" color="deepBlue">
+          {icon}
+        </ThemeIcon>
+        <Title order={3} size="h4">
+          {title}
+        </Title>
+        <Text>{description}</Text>
+      </Stack>
+    </Card>
+  </Grid.Col>
+);
+
 export default function HomePage() {
   return (
     <Box>
       {/* Hero Section */}
-      <Box bg="deepBlue.6" c="white" py={80}>
+      <Box bg="deepBlue.6" c="dark.0" py={80}>
         <Container size="lg">
           <Stack gap="xl" align="center" ta="center">
             <Title order={1} size={48} fw={700}>
-              Professional Websites for Northern Colorado Businesses
+              Software Solutions for Northern Colorado Businesses
             </Title>
-            <Text size="xl" maw={700}>
+            <Text size="xl" maw={700} c="white">
               Custom web solutions that help local businesses grow. From restaurants to landscapers,
               we build fast, mobile-friendly websites that turn visitors into customers.
             </Text>
@@ -51,67 +94,46 @@ export default function HomePage() {
 
       {/* Value Propositions */}
       <Container size="lg" py={80}>
-        <Grid>
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card shadow="sm" padding="lg" radius="md" h="100%">
-              <Stack gap="md" align="center" ta="center">
-                <ThemeIcon size={60} radius="md" variant="light" color="deepBlue">
-                  <IconDeviceMobile size={30} />
-                </ThemeIcon>
-                <Title order={3} size="h4">
-                  Modern & Mobile-First
-                </Title>
-                <Text c="dimmed">
-                  Your customers are searching on their phones. We build websites that look great
-                  and load fast on any device.
-                </Text>
-              </Stack>
-            </Card>
-          </Grid.Col>
+        <Stack gap="xl" align="center">
+          <Stack gap="md" align="center" ta="center" maw={700}>
+            <Title order={2}>What We Offer</Title>
+            <Text size="lg">
+              We offer tailored web development services designed to meet the unique needs of your
+              business
+            </Text>
+          </Stack>
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card shadow="sm" padding="lg" radius="md" h="100%">
-              <Stack gap="md" align="center" ta="center">
-                <ThemeIcon size={60} radius="md" variant="light" color="deepBlue">
-                  <IconEdit size={30} />
-                </ThemeIcon>
-                <Title order={3} size="h4">
-                  Easy to Update
-                </Title>
-                <Text c="dimmed">
-                  No technical skills needed. We'll show you how to make simple updates, or we'll
-                  handle it for you.
-                </Text>
-              </Stack>
-            </Card>
-          </Grid.Col>
+          <Grid>
+            <ValuePropositionCard
+              icon={<IconDeviceMobile size={30} />}
+              title="Modern & Mobile-First"
+              description="Your customers are searching on their phones. We build websites that look great and load fast on any device."
+            />
 
-          <Grid.Col span={{ base: 12, md: 4 }}>
-            <Card shadow="sm" padding="lg" radius="md" h="100%">
-              <Stack gap="md" align="center" ta="center">
-                <ThemeIcon size={60} radius="md" variant="light" color="deepBlue">
-                  <IconMapPin size={30} />
-                </ThemeIcon>
-                <Title order={3} size="h4">
-                  Local Expertise
-                </Title>
-                <Text c="dimmed">
-                  We understand Northern Colorado businesses and build websites that help you stand
-                  out in your community.
-                </Text>
-              </Stack>
-            </Card>
-          </Grid.Col>
-        </Grid>
+            <ValuePropositionCard
+              icon={<IconEdit size={30} />}
+              title="Beautifully Optimized"
+              description="From design to SEO, we create websites that not only look great but also perform well in search engines."
+            />
+
+            <ValuePropositionCard
+              icon={<IconMapPin size={30} />}
+              title="Local Expertise"
+              description="We understand Northern Colorado businesses and build websites that help you stand out in our community."
+            />
+          </Grid>
+        </Stack>
       </Container>
 
       {/* Who We Serve */}
-      <Box bg="gray.0" py={80}>
+      <Box bg="deepBlue.6" py={80}>
         <Container size="lg">
           <Stack gap="xl" align="center">
             <Stack gap="md" align="center" ta="center" maw={700}>
-              <Title order={2}>Who We Serve</Title>
-              <Text size="lg" c="dimmed">
+              <Title order={2} c="dark.0">
+                Who We Serve
+              </Title>
+              <Text size="lg" c="dark.0">
                 We specialize in helping local businesses establish their online presence
               </Text>
             </Stack>
@@ -123,7 +145,11 @@ export default function HomePage() {
                     <ThemeIcon size={50} radius="md" variant="light" color="warmRed">
                       <IconChefHat size={25} />
                     </ThemeIcon>
-                    <Text fw={600}>Restaurants & Cafés</Text>
+                    <Text fw={600}>Food Industry</Text>
+                    <Text size="sm">
+                      Showcase your menu, provide online ordering, and offer crucial information
+                      about your business
+                    </Text>
                   </Stack>
                 </Card>
               </Grid.Col>
@@ -135,8 +161,9 @@ export default function HomePage() {
                       <IconTrees size={25} />
                     </ThemeIcon>
                     <Text fw={600}>Home Services</Text>
-                    <Text size="sm" c="dimmed">
-                      Landscaping, HVAC, Contractors
+                    <Text size="sm">
+                      Provide clients images of your work, information on your services, and
+                      streamlined contact options
                     </Text>
                   </Stack>
                 </Card>
@@ -173,88 +200,37 @@ export default function HomePage() {
         <Stack gap="xl" align="center">
           <Stack gap="md" align="center" ta="center" maw={700}>
             <Title order={2}>How It Works</Title>
-            <Text size="lg" c="dimmed">
-              Getting your business online is simple
-            </Text>
+            <Text size="lg">Getting your business online is simple</Text>
           </Stack>
 
           <Grid w="100%">
             <Grid.Col span={{ base: 12, md: 4 }}>
               <Stack gap="md" align="center" ta="center">
-                <Box
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--mantine-color-deepBlue-6)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: 24,
-                    fontWeight: 700,
-                  }}
-                >
-                  1
-                </Box>
+                <StepIcon number={1} />
                 <Title order={3} size="h4">
                   Consultation
                 </Title>
-                <Text c="dimmed">
-                  We learn about your business and goals in a free consultation
-                </Text>
+                <Text>We learn about your business and goals in a free consultation</Text>
               </Stack>
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 4 }}>
               <Stack gap="md" align="center" ta="center">
-                <Box
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--mantine-color-deepBlue-6)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: 24,
-                    fontWeight: 700,
-                  }}
-                >
-                  2
-                </Box>
+                <StepIcon number={2} />
                 <Title order={3} size="h4">
                   Design & Build
                 </Title>
-                <Text c="dimmed">We create a custom website tailored to your needs and brand</Text>
+                <Text>We create a custom website tailored to your needs and brand</Text>
               </Stack>
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 4 }}>
               <Stack gap="md" align="center" ta="center">
-                <Box
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--mantine-color-deepBlue-6)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: 24,
-                    fontWeight: 700,
-                  }}
-                >
-                  3
-                </Box>
+                <StepIcon number={3} />
                 <Title order={3} size="h4">
                   Launch & Support
                 </Title>
-                <Text c="dimmed">
-                  Go live with ongoing support and training to manage your site
-                </Text>
+                <Text>Go live with ongoing support and professional advice</Text>
               </Stack>
             </Grid.Col>
           </Grid>
@@ -262,11 +238,13 @@ export default function HomePage() {
       </Container>
 
       {/* Social Proof Placeholder */}
-      <Box bg="gray.0" py={80}>
+      <Box bg="deepBlue.6" py={80}>
         <Container size="lg">
           <Stack gap="xl" align="center" ta="center">
-            <Title order={2}>Trusted by Northern Colorado Businesses</Title>
-            <Text size="lg" c="dimmed" maw={600}>
+            <Title order={2} c="dark.0">
+              Trusted by Northern Colorado Businesses
+            </Title>
+            <Text size="lg" maw={600} c="dark.0">
               Currently building our portfolio with local businesses. Check back soon for
               testimonials and case studies.
             </Text>
@@ -275,7 +253,7 @@ export default function HomePage() {
       </Box>
 
       {/* Final CTA */}
-      <Box bg="deepBlue.6" c="white" py={80}>
+      <Box py={80}>
         <Container size="lg">
           <Stack gap="xl" align="center" ta="center">
             <Title order={2}>Ready to grow your online presence?</Title>
@@ -287,7 +265,7 @@ export default function HomePage() {
               <Button component={Link} href="/contact" size="lg" variant="white" color="deepBlue">
                 Get Started
               </Button>
-              <Button component={Link} href="/services" size="lg" variant="outline" c="white">
+              <Button component={Link} href="/services" size="lg" variant="outline">
                 Learn More About Our Services
               </Button>
             </Group>

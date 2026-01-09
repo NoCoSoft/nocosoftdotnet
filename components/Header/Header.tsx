@@ -65,34 +65,33 @@ export default function Header() {
             </Group>
           </Link>
 
-          {/* Desktop Navigation */}
-          <Group gap="xs" visibleFrom="sm">
-            {navLinks.map((link) => (
-              <Button
-                key={link.href}
-                component={Link}
-                href={link.href}
-                variant={isActive(link.href) ? 'light' : 'subtle'}
-                color={isActive(link.href) ? 'deepBlue' : 'gray'}
-              >
-                {link.label}
-              </Button>
-            ))}
+          {isMounted && (
+            <Group gap="xs" visibleFrom="sm">
+              {navLinks.map((link) => (
+                <Button
+                  key={link.href}
+                  component={Link}
+                  href={link.href}
+                  // variant="subtle"
+                  variant={isActive(link.href) ? 'light' : 'subtle'}
+                  color={computedColorScheme === 'light' ? 'dark.9' : 'dark.2'}
+                >
+                  {link.label}
+                </Button>
+              ))}
 
-            {/* Dark mode toggle */}
-            {isMounted && (
+              {/* Dark mode toggle */}
               <ActionIcon
                 onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
                 variant="subtle"
-                color="gray"
+                color={computedColorScheme === 'light' ? 'dark' : 'yellow'}
                 size="lg"
                 aria-label="Toggle color scheme"
               >
                 {computedColorScheme === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />}
               </ActionIcon>
-            )}
-          </Group>
-
+            </Group>
+          )}
           {/* Mobile Menu Button */}
           <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" size="sm" />
         </Group>

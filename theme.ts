@@ -49,7 +49,24 @@ export const theme = createTheme({
     deepBlue,
     warmRed,
     goldenYellow,
+    // Override dark mode color palette to use deep blue shades
+    dark: [
+      '#f5f5f5', // dark.0 - lightest text on dark bg (pure white for maximum contrast)
+      '#f8f9fa', // dark.1
+      '#e9ecef', // dark.2
+      '#dee2e6', // dark.3
+      '#ced4da', // dark.4
+      '#adb5bd', // dark.5 - borders, dividers
+      '#1A4771', // dark.6 - default dark background
+      '#123A5F', // dark.7 - hover states
+      '#0C2D4D', // dark.8 - darker elements
+      '#00408f', // dark.9 - deepest blue (darkest backgrounds)
+    ],
   },
+
+  // Set default text colors for light and dark mode
+  black: '#0d4da3', // Light mode text color (deep blue instead of black)
+  white: '#f5f5f5', // Dark mode text color (pure white)
 
   // Slightly larger default radius for modern feel
   defaultRadius: 'md',
